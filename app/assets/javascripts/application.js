@@ -3,7 +3,6 @@
 //= require_tree .
 
 $(document).ready(function () {
-  var id = location.pathname.split('/')[location.pathname.split('/').length - 1];
 
   var displayQuiz = function (questions, x, score) {
     if (x == questions.length) {
@@ -20,16 +19,17 @@ $(document).ready(function () {
     $('.score').empty().append((x+1) + '/' + questions.length)
     $('.btn-default').on('click', function () {
       if ($(this).data('correct')) {
-        $(this).removeClass('btn-default');
+//        $(this).removeClass('btn-default');
         $(this).addClass('btn-success');
-        $('.result').empty().append('CORRECT');
+        $('.result').empty().append('CORRECT!');
         score += 1;
       } else {
-        $(this).removeClass('btn-default');
+//        $(this).removeClass('btn-default');
         $(this).addClass('btn-danger');
-        $('.result').empty().append('INCORRECT')
+        $('.result').empty().append('INCORRECT!');
+        $(".btn[data-correct='true']").addClass('btn-success');
       }
-      $('.btn-default').attr('disabled', 'disabled');
+//      $('.btn-default').attr('disabled', 'disabled');
       $(this).attr('disabled', 'disabled');
 
     });
@@ -39,6 +39,7 @@ $(document).ready(function () {
 
   };
 
+  var id = location.pathname.split('/')[location.pathname.split('/').length - 1];
   var promiseOfResult = $.getJSON("/quizzes/" + id + "/questions");
   promiseOfResult.success(function (results) {
     displayQuiz(results, 0, 0);
