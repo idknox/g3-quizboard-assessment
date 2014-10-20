@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   var displayQuiz = function (questions, x, score) {
     if (x == questions.length) {
-      $('.container').empty().append('<h1>Final Score: ' + ((score/questions.length) * 100) + '%</h1>' )
+      $('.container').empty().append('<h1>Final Score: ' + ((score / questions.length) * 100) + '%</h1>')
       return
     }
     $('.question').empty().prepend(questions[x].description);
@@ -16,20 +16,17 @@ $(document).ready(function () {
       $('.answers').append('<button class="btn btn-default" data-correct=' + answer.correct + '>' + answer.description + '</button>');
     });
     $('.nav').empty().prepend('<button class="btn btn-primary">Next</button>');
-    $('.score').empty().append((x+1) + '/' + questions.length)
+    $('.score').empty().append((x + 1) + '/' + questions.length)
     $('.btn-default').on('click', function () {
       if ($(this).data('correct')) {
-//        $(this).removeClass('btn-default');
         $(this).addClass('btn-success');
         $('.result').empty().append('CORRECT!');
         score += 1;
       } else {
-//        $(this).removeClass('btn-default');
         $(this).addClass('btn-danger');
         $('.result').empty().append('INCORRECT!');
         $(".btn[data-correct='true']").addClass('btn-success');
       }
-//      $('.btn-default').attr('disabled', 'disabled');
       $(this).attr('disabled', 'disabled');
 
     });
