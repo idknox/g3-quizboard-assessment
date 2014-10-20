@@ -6,7 +6,11 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
-  end
 
+    respond_to do |format|
+      format.html
+      format.json { render :json => @quiz }
+    end
+  end
 
 end
